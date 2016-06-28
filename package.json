@@ -1,0 +1,22 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leenty/koaV2Test.git"
+  },
+  "author": "leenty@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leenty/koaV2Test/issues"
+  },
+  "homepage": "https://github.com/leenty/koaV2Test#readme",
+  "dependencies": {
+    "koa": "^2.0.0"
+  }
+}
