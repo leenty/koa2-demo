@@ -28,7 +28,11 @@ app.use(function *(next){
 // response
 
 app.use(function *(){
-  this.body = 'Hello World';
+  // this.body = 'Hello World';
+  this.body = {
+    test: 123,
+    qwr: 'asd'
+  };
 });
-
-app.listen(3000);
+app.listen(3002);
+console.log('http://localhost:3002');

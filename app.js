@@ -1,13 +1,28 @@
-// Koa application is now a class and requires the new operator.
-var Koa = require('koa');
-var app = new Koa();
+const app = new (require('koa'))()
+const koa = require('koa-router')()
+const json = require('koa-json')
+const logger = require('koa-logger')
+const auth = require('./routes/auth.js')
 
-app.use(ctx => {
-  ctx.body = 'Hello World';  
-});
+app.use(require('koa-bodyparser')())
 
-// app.use(function *(){
-//   this.body = 'Hello World';
-// });
+app.use(function* (next) {
+  let start = new Date()
+  yield next
+  let ms = new Date() - start
+  console.log('%s %s - %sms', this.method, this.url, ms)
+})
 
-app.listen(3000);
+app.on('error', (err, ctx) => {
+  console.log('server serror!', err)
+})
+
+koa.use('/auth', auth.routes())
+
+app.use(koa.routes())
+
+app.listen(8889, () => {
+  console.log('http://localhost:8889')
+})
+
+module.exports = app
