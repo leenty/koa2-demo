@@ -1,22 +1,23 @@
 {
-  "name": "koa",
+  "name": "koa2-demo",
   "version": "1.0.0",
-  "description": "koa",
+  "description": "use koa2 to create server",
   "main": "index.js",
   "scripts": {
-    "test": "node app.js",
+    "dev": "node app.js",
+    "debug": "node --inspect app.js",
     "orm": "sh sh/orm.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leenty/koaV2Test.git"
+    "url": "git+https://github.com/leenty/koa2-demo.git"
   },
   "author": "leenty@qq.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/leenty/koaV2Test/issues"
+    "url": "https://github.com/leenty/koa2-demo/issues"
   },
-  "homepage": "https://github.com/leenty/koaV2Test#readme",
+  "homepage": "https://github.com/leenty/koa2-demo#readme",
   "dependencies": {
     "koa": "^2.0.0",
     "koa-bodyparser": "^4.0.0",

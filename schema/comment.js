@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     user_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false
+    },
+    comment: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     tableName: 'comment'

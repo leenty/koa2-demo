@@ -1,5 +1,5 @@
-const db =  require('../config/db')
-const userModel =  '../schema/user'
+const db = require('../config/db')
+const userModel = '../schema/user'
 
 const User = db.import(userModel)
 

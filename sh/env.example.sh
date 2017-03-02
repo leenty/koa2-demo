@@ -1,5 +1,5 @@
 #!/bin/sh
-output="../schema"
+output="./schema"
 db="dbName"
 host="127.0.0.1"
 user="root"

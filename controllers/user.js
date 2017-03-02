@@ -11,7 +11,6 @@ const postUserAuth = function* () {
   const data = this.request.body
   const userInfo = yield user.getUserByName(data.name)
 
-  console.log(userInfo);
   if (userInfo) {
     if (userInfo.password != data.password) {
       this.body = {
