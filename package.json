@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node app.js",
-    "orm": "sequelize-auto -o \"./schema\" -d koa -h 127.0.0.1 -u root -p 3306 -x root -e mysql"
+    "orm": "sh sh/orm.sh"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "koa": "^2.0.0",
     "koa-bodyparser": "^4.0.0",
     "koa-json": "^1.1.3",
+    "koa-jwt": "^1.3.1",
     "koa-logger": "^2.0.1",
     "koa-router": "^5.4.0",
     "mysql": "^2.13.0",
