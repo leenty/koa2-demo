@@ -1,27 +1,22 @@
-class _modelFind {
-  constructor(model) {
-    this.model = model
-  }
-  findOne (field, fieldName, attributes = null) {
+const setModelMethods = function (model) {
+  model._findOne = function (field, fieldName, attributes = null) {
     let where = {}
     where[field] = fieldName
-    return this.model.findOne({
+    return this.findOne({
       where,
       attributes
     })
   }
-  findAll (field, fieldName, attributes = null) {
+  model._findAll = function (field, fieldName, attributes = null) {
     let where = {}
     where[field] = fieldName
-    return this.model.findAll({
+    return this.findAll({
       where,
       attributes
     })
   }
+
+  return model
 }
 
-const setModel = function (model) {
-  return new _modelFind(model)
-}
-
-module.exports = setModel
+module.exports = setModelMethods

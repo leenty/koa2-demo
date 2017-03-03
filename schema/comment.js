@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     comment: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    post_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
     }
   }, {
     tableName: 'comment'
