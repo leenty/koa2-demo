@@ -1,7 +1,7 @@
 const db = require('../config/db')
 const userModel = '../schema/user'
 
-const User = require('../middleWare/modelFind')(db.import(userModel))
+const User = require('../middleWares/modelFind')(db.import(userModel))
 
 const getUserById = function* (id) {
   const userInfo = yield User._findOne('id', id)

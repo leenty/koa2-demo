@@ -8,7 +8,6 @@ const getComment = function* () {
 
 const createComment = function* () {
   const data = this.request.body
-  console.log(data);
   yield Comment.createComment(data)
   this.body = {
     success: true
@@ -16,8 +15,6 @@ const createComment = function* () {
 }
 
 const removeComment = function* () {
-  // const id = this.params.id
-  // const user_id = this.params.user_id
   const {id, user_id} = this.params
   const msg = yield Comment.removeComment(id, user_id)
 
@@ -28,8 +25,7 @@ const removeComment = function* () {
 }
 
 const updateComment = function* () {
-  const id = this.params.id
-  const user_id = this.params.user_id
+  const {id, user_id} = this.params
   const comment = this.request.body.comment
   const msg = yield Comment.updateComment(id, user_id, comment)
 

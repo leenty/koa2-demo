@@ -1,7 +1,7 @@
 const db = require('../config/db')
 const commentModel = '../schema/comment'
 
-const Comment = require('../middleWare/modelFind')(db.import(commentModel))
+const Comment = require('../middleWares/modelFind')(db.import(commentModel))
 
 const getCommentByUserId = function* (userId) {
   const comment = yield Comment._findAll('user_id', userId, ['id', 'comment'])
@@ -9,7 +9,6 @@ const getCommentByUserId = function* (userId) {
 }
 
 const createComment = function* ({user_id, comment, post_id}) {
-  console.log(user_id, comment, post_id);
   yield Comment.create({
     user_id,
     comment,
@@ -19,14 +18,12 @@ const createComment = function* ({user_id, comment, post_id}) {
 }
 
 const removeComment = function* (id, user_id) {
-  console.log(id, user_id);
   const result = yield Comment.destroy({
     where: {
       id,
       user_id
     }
   })
-  console.log('delete',result);
   return result ? '删除成功！' : '删除失败！'
 }
 
