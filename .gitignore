@@ -1,4 +1,5 @@
 .DS_Store
 /node_modules
-sh/env.sh
+bin/env.sh
+bin/ngrok.sh
 npm-debug.log
