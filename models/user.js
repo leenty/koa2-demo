@@ -4,13 +4,24 @@ const userModel = '../schema/user'
 const User = require('../middleWares/modelFind')(db.import(userModel))
 
 const getUserById = function* (id) {
-  const userInfo = yield User._findOne('id', id)
+  const userInfo = yield User.findById(id, {
+    attributes: ['id', 'name']
+  })
   return userInfo
 }
 
 const getUserByName = function* (name) {
   const userInfo = yield User._findOne('name', name)
   return userInfo
+}
+
+const createUser = function* ({id, name, password}) {
+  yield User.create({
+    id,
+    name,
+    password
+  })
+  return true
 }
 
 module.exports = {

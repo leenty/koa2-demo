@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node app.js",
     "debug": "node --inspect app.js",
-    "orm": "sh sh/orm.sh"
+    "orm": "sh bin/orm.sh"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/leenty/koa2-demo#readme",
   "dependencies": {
+    "axios": "^0.15.3",
     "koa": "^2.0.0",
     "koa-bodyparser": "^4.0.0",
     "koa-json": "^1.1.3",
