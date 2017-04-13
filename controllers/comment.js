@@ -1,4 +1,4 @@
-const Comment = require('../models/comment')
+const Comment = require('../models/comments')
 
 const getComment = function* () {
   const userId = this.params.user_id

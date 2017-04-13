@@ -1,7 +1,4 @@
-const db = require('../config/db')
-const commentModel = '../schema/comment'
-
-const Comment = require('../middleWares/modelFind')(db.import(commentModel))
+const Comment = require('../middleWares/modelFind')(require('../db/models/index.js').comment)
 
 const getCommentByUserId = function* (userId) {
   const comment = yield Comment._findAll('user_id', userId, ['id', 'comment'])

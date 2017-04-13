@@ -37,8 +37,8 @@ app.on('error', (err, ctx) => {
 
 app.use(router.routes())
 
+
 app.listen(8889, () => {
   console.log('http://localhost:8889')
 })
-
 module.exports = app

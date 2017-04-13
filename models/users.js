@@ -1,7 +1,4 @@
-const db = require('../config/db')
-const userModel = '../schema/user'
-
-const User = require('../middleWares/modelFind')(db.import(userModel))
+const User = require('../db/models/index.js').user
 
 const getUserById = function* (id) {
   const userInfo = yield User.findById(id, {
@@ -15,16 +12,24 @@ const getUserByName = function* (name) {
   return userInfo
 }
 
-const createUser = function* ({id, name, password}) {
+const createUser = function* ({name, password, email, bio, blog, company, github, avatar, location, mobile}) {
   yield User.create({
-    id,
     name,
-    password
+    password,
+    email,
+    bio,
+    blog,
+    company,
+    github,
+    avatar,
+    location,
+    mobile
   })
   return true
 }
 
 module.exports = {
   getUserById, // 导出getUserById的方法，将会在controller里调用
-  getUserByName
+  getUserByName,
+  createUser
 }
