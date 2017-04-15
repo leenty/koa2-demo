@@ -1,21 +1,21 @@
 const jwt = require('koa-jwt');
-const user = require('../models/users')
+const user = require('../models/user')
 const axios = require('axios')
 const querystring = require('querystring')
 
-const getUserInfo = function* () {
-  const id = this.params.id
-  const result = yield user.getUserById(id)
-  this.body = result
+const getUserInfo = async function (ctx) {
+  const id = ctx.params.id
+  const result = await user.getUserById(id)
+  ctx.body = result
 }
 
-const postUserAuth = function* () {
-  const data = this.request.body
-  const userInfo = yield user.getUserByName(data.name)
+const postUserLogin = async function (ctx) {
+  const data = ctx.request.body
+  const userInfo = await user.getUserByName(data.name)
 
   if (userInfo) {
     if (userInfo.password != data.password) {
-      this.body = {
+      ctx.body = {
         success: false,
         info: 'wrong password!'
       }
@@ -27,21 +27,21 @@ const postUserAuth = function* () {
       console.log(userToken)
       const secret = 'koa-test'
       const token = jwt.sign(userToken, secret)
-      this.body = {
+      ctx.body = {
         success: true,
         token: token
       }
     }
   } else {
-    this.body = {
+    ctx.body = {
       success: false,
       info: 'sorry! User does not exist!'
     }
   }
 }
 
-function* githubUserInfo (code) {
-  const loginAccess = yield axios.post('https://github.com/login/oauth/access_token', {
+async function gctxithubUserInfo (code) {
+  const loginAccess = await axios.post('https://github.com/login/oauth/access_token', {
     client_id: 'c265a8dc9bd925256116',
     client_secret: '0535b4078b138a72f1142f950f671da2b5ab52da',
     code: code
@@ -50,7 +50,7 @@ function* githubUserInfo (code) {
   const tokenObj = querystring.parse(loginAccess.data)
   console.log('\ntokenObj', tokenObj)
 
-  const userInfo = yield axios.create({
+  const userInfo = await axios.create({
     headers: {'Authorization': `token ${tokenObj.access_token}`}
   })
     .get('https://api.github.com/user')
@@ -72,21 +72,19 @@ function* githubUserInfo (code) {
   return userInfo
 }
 
-const getGithubUserInfo = function* () {
-  const code = this.query.code
-  const userInfoResult = yield githubUserInfo(code)
+const getGithubUserInfo = async function (ctx) {
+  const code = ctx.query.code
+  const userInfoResult = await githubUserInfo(code)
   if (userInfoResult.success) {
-    yield user.createUser(userInfoResult.data)
-    this.body = userInfoResult
+    await user.createUser(userInfoResult.data)
+    ctx.body = userInfoResult
   } else {
-    this.body = userInfoResult
+    ctx.body = userInfoResult
   }
 }
 
 module.exports = {
-  auth (router) {
-    router.get('/user/:id', getUserInfo)
-    router.post('/user', postUserAuth)
-    router.get('/github', getGithubUserInfo)
-  }
+  getUserInfo,
+  postUserLogin,
+  getGithubUserInfo
 }

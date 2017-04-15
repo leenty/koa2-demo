@@ -1,6 +1,7 @@
 const User = require('../db/models/index.js').user
 
 const getUserById = function* (id) {
+  console.log('test', id);
   const userInfo = yield User.findById(id, {
     attributes: ['id', 'name']
   })

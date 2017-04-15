@@ -2,7 +2,7 @@ const app = new (require('koa'))()
 const json = require('koa-json')
 const logger = require('koa-logger')
 
-const router = require('./routes')
+const router = require('./routes.js')
 
 app.use(require('koa-bodyparser')())
 
