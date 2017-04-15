@@ -1,4 +1,5 @@
 .DS_Store
 /node_modules
 bin/ngrok.sh
+config/database.json
 npm-debug.log

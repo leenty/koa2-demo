@@ -3,13 +3,13 @@ const user = require('../models/user')
 const axios = require('axios')
 const querystring = require('querystring')
 
-const getUserInfo = async function (ctx) {
+const getUserInfo = async (ctx) => {
   const id = ctx.params.id
   const result = await user.getUserById(id)
   ctx.body = result
 }
 
-const postUserLogin = async function (ctx) {
+const postUserLogin = async (ctx) => {
   const data = ctx.request.body
   const userInfo = await user.getUserByName(data.name)
 
@@ -40,7 +40,7 @@ const postUserLogin = async function (ctx) {
   }
 }
 
-async function gctxithubUserInfo (code) {
+async function gctxithubUserInfo(code) {
   const loginAccess = await axios.post('https://github.com/login/oauth/access_token', {
     client_id: 'c265a8dc9bd925256116',
     client_secret: '0535b4078b138a72f1142f950f671da2b5ab52da',
@@ -72,7 +72,7 @@ async function gctxithubUserInfo (code) {
   return userInfo
 }
 
-const getGithubUserInfo = async function (ctx) {
+const getGithubUserInfo = async (ctx) => {
   const code = ctx.query.code
   const userInfoResult = await githubUserInfo(code)
   if (userInfoResult.success) {
