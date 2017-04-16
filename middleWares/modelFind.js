@@ -1,5 +1,6 @@
-const setModelMethods = function (model) {
-  model._findOne = function (field, fieldName, attributes = null) {
+var sequelize = require('sequelize')
+const setModelMethods = function () {
+  sequelize.prototype._findOne = function (field, fieldName, attributes = null) {
     let where = {}
     where[field] = fieldName
     return this.findOne({
@@ -7,7 +8,7 @@ const setModelMethods = function (model) {
       attributes
     })
   }
-  model._findAll = function (field, fieldName, attributes = null) {
+  sequelize.prototype._findAll = function (field, fieldName, attributes = null) {
     let where = {}
     where[field] = fieldName
     return this.findAll({
@@ -15,8 +16,6 @@ const setModelMethods = function (model) {
       attributes
     })
   }
-
-  return model
 }
 
 module.exports = setModelMethods

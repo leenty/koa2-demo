@@ -8,6 +8,7 @@ const getComment = async (ctx) => {
 
 const createComment = async (ctx) => {
   const data = ctx.request.body
+  console.log('createComment', data)
   await Comment.createComment(data)
   ctx.body = {
     success: true

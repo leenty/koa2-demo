@@ -5,6 +5,8 @@ const logger = require('koa-logger')
 
 const router = require('./routes.js')
 
+require('./middleWares/modelFind')()
+
 app.use(require('koa-bodyparser')())
 
 app.use(async (ctx, next) => {

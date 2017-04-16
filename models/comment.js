@@ -1,12 +1,12 @@
-const Comment = require('../middleWares/modelFind')(require('../db/models/index.js').comment)
+const Comment = require('../db/models/index.js').comment
 
-const getCommentByUserId = function* (userId) {
-  const comment = yield Comment._findAll('user_id', userId, ['id', 'comment'])
+const getCommentByUserId = async (userId) => {
+  const comment = await Comment._findAll('user_id', userId, ['id', 'comment'])
   return comment
 }
 
-const createComment = function* ({user_id, comment, post_id}) {
-  yield Comment.create({
+const createComment = async ({user_id, comment, post_id}) => {
+  await Comment.create({
     user_id,
     comment,
     post_id
@@ -14,8 +14,8 @@ const createComment = function* ({user_id, comment, post_id}) {
   return true
 }
 
-const removeComment = function* (id, user_id) {
-  const result = yield Comment.destroy({
+const removeComment = async (id, user_id) => {
+  const result = await Comment.destroy({
     where: {
       id,
       user_id
@@ -24,8 +24,8 @@ const removeComment = function* (id, user_id) {
   return result ? '删除成功！' : '删除失败！'
 }
 
-const updateComment = function* (id, user_id, comment) {
-  const result = yield Comment.update(
+const updateComment = async (id, user_id, comment) => {
+  const result = await Comment.update(
     {
       comment
     },

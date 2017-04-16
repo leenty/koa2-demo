@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       password: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       mobile: {
         type: Sequelize.STRING

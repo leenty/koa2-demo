@@ -1,4 +1,4 @@
-const jwt = require('koa-jwt');
+const jwt = require('../middleWares/token.js')
 const user = require('../models/user')
 const axios = require('axios')
 const querystring = require('querystring')
@@ -20,13 +20,10 @@ const postUserLogin = async (ctx) => {
         info: 'wrong password!'
       }
     } else {
-      const userToken = {
+      const token = jwt.setToken({
         name: userInfo.name,
         id: userInfo.id
-      }
-      console.log(userToken)
-      const secret = 'koa-test'
-      const token = jwt.sign(userToken, secret)
+      })
       ctx.body = {
         success: true,
         token: token
@@ -40,7 +37,7 @@ const postUserLogin = async (ctx) => {
   }
 }
 
-async function gctxithubUserInfo(code) {
+async function githubUserInfo(code) {
   const loginAccess = await axios.post('https://github.com/login/oauth/access_token', {
     client_id: 'c265a8dc9bd925256116',
     client_secret: '0535b4078b138a72f1142f950f671da2b5ab52da',
@@ -50,34 +47,42 @@ async function gctxithubUserInfo(code) {
   const tokenObj = querystring.parse(loginAccess.data)
   console.log('\ntokenObj', tokenObj)
 
-  const userInfo = await axios.create({
+  return await axios.create({
     headers: {'Authorization': `token ${tokenObj.access_token}`}
   })
     .get('https://api.github.com/user')
-    .then(userInfo => {
-      console.log('userInfo: ', userInfo.data);
+    .then(githubUser => {
+      console.log('githubUser: ', githubUser.data)
       return {
         success: true,
-        status: userInfo.status,
-        data: userInfo.data
+        status: githubUser.status,
+        data: githubUser.data
       }
     }).catch(err => {
-      console.error('userError: ', err);
+      console.error('userError: ', err)
       return {
         success: false,
         status: err.response.status,
         message: err.response.data.message
       }
     })
-  return userInfo
 }
 
 const getGithubUserInfo = async (ctx) => {
   const code = ctx.query.code
   const userInfoResult = await githubUserInfo(code)
   if (userInfoResult.success) {
-    await user.createUser(userInfoResult.data)
+    const userInfo = await user.createUser(userInfoResult.data)
     ctx.body = userInfoResult
+    const token = jwt.setToken({
+      name: userInfo.name,
+      id: userInfo.id
+    })
+    ctx.body = {
+      success: true,
+      token: token,
+      data: userInfoResult.data
+    }
   } else {
     ctx.body = userInfoResult
   }
