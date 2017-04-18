@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      github_id: {
+        unique: true,
+        type: Sequelize.STRING
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
@@ -16,9 +20,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       mobile: {
+        unique: true,
         type: Sequelize.STRING
       },
       email: {
+        unique: true,
         type: Sequelize.STRING
       },
       bio: {
@@ -33,7 +39,7 @@ module.exports = {
       github: {
         type: Sequelize.STRING
       },
-      avatar: {
+      avatar_url: {
         type: Sequelize.STRING
       },
       location: {

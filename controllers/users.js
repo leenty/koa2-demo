@@ -45,14 +45,14 @@ async function githubUserInfo(code) {
   })
   // access_token=f20bbd86ce68c4028ba07b05c26da60dc0af9ce4&scope=&token_type=bearer
   const tokenObj = querystring.parse(loginAccess.data)
-  console.log('\ntokenObj', tokenObj)
+  // console.log('\ntokenObj', tokenObj)
 
   return await axios.create({
     headers: {'Authorization': `token ${tokenObj.access_token}`}
   })
     .get('https://api.github.com/user')
     .then(githubUser => {
-      console.log('githubUser: ', githubUser.data)
+      // console.log('githubUser: ', githubUser.data)
       return {
         success: true,
         status: githubUser.status,
@@ -70,9 +70,11 @@ async function githubUserInfo(code) {
 
 const getGithubUserInfo = async (ctx) => {
   const code = ctx.query.code
+  const redirect = ctx.query.redirect
+  console.log('redirect >>> ', redirect)
   const userInfoResult = await githubUserInfo(code)
   if (userInfoResult.success) {
-    const userInfo = await user.createUser(userInfoResult.data)
+    const userInfo = await user.createGithubUser(userInfoResult.data)
     ctx.body = userInfoResult
     const token = jwt.setToken({
       name: userInfo.name,

@@ -2,7 +2,7 @@ const User = require('../db/models/index.js').user
 
 const getUserById = async (id) => {
   const userInfo = await User.findById(id, {
-    attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatar', 'location', 'mobile']
+    attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatar_url', 'location', 'mobile']
   })
   return userInfo
 }
@@ -12,12 +12,13 @@ const getUserByName = async (name) => {
   return userInfo
 }
 
-const createUser = async ({name, password, email, bio, blog, company, github, avatar, location, mobile}) => {
-  return await User.findOrCreate({
+const createGithubUser = async ({id, name, password, email, bio, blog, company, github, avatar_url, location, mobile}) => {
+  var result = await User.findOrCreate({
     where: {
-      email
+      github_id: id
     },
     defaults: {
+      github_id: id,
       name,
       password,
       email,
@@ -25,15 +26,17 @@ const createUser = async ({name, password, email, bio, blog, company, github, av
       blog,
       company,
       github,
-      avatar,
+      avatar_url,
       location,
       mobile
     }
   })
+  console.log('User.findOrCreate >>> ', result);
+  return result[0]
 }
 
 module.exports = {
   getUserById, // 导出getUserById的方法，将会在controller里调用
   getUserByName,
-  createUser
+  createGithubUser
 }
