@@ -20,6 +20,7 @@
   "homepage": "https://github.com/leenty/koa2-demo#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "kcors": "^1.3.2",
     "koa": "^2.0.0",
     "koa-bodyparser": "^4.0.0",
     "koa-json": "^1.1.3",

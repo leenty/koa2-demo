@@ -2,6 +2,7 @@ const config = require('./config')
 const app = new (require('koa'))()
 const json = require('koa-json')
 const logger = require('koa-logger')
+const cors = require('kcors')
 
 const router = require('./routes.js')
 
@@ -39,6 +40,13 @@ app.on('error', (err, ctx) => {
 
 
 app.use(router.routes())
+app.use(cors())
+// app.use(async (ctx) => {
+//   ctx.set('Access-Control-Allow-Origin', 'http://localhost:8090')
+//   ctx.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE')
+//   ctx.set('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With')
+//   ctx.set('Access-Control-Allow-Credentials', true)
+// })
 
 
 app.listen(config.port, () => {
