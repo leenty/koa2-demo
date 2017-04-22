@@ -1,0 +1,42 @@
+module.exports = {
+  'development': {
+    'port': '8889',
+    'token_secret': 'koa-test',
+    'allowOrigin': '*',
+    'allowHeaders': [],
+    'allowMethods': ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    'maxAge': 60 * 60 * 24,
+    'credentials': true,
+    'github': {
+      'client_id': '',
+      'client_secret': ''
+    }
+  },
+  'test': {
+    'port': '8889',
+    'token_secret': 'koa-test',
+    'allowOrigin': '*',
+    'allowHeaders': [],
+    'allowMethods': ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    'maxAge': 60 * 60 * 24,
+    'credentials': true,
+    'github': {
+      'client_id': '',
+      'client_secret': ''
+    }
+  },
+  'production': {
+    'port': '80',
+    'token_secret': 'koa-test',
+    'allowOrigin': ['http://www.leenty.com', 'http://leenty.com', 'http://vue2.leenty.com'],
+    // 'allowHeaders': ['Content-Type', 'Authorization', 'X-Requested-With', 'emulateJSON', 'crossOrigin'],
+    'allowHeaders': [],
+    'allowMethods': ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    'maxAge': 60 * 60 * 24,
+    'credentials': true,
+    'github': {
+      'client_id': '',
+      'client_secret': ''
+    }
+  }
+}

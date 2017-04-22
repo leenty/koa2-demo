@@ -2,6 +2,7 @@ const jwt = require('../middleWares/token.js')
 const user = require('../models/user')
 const axios = require('axios')
 const querystring = require('querystring')
+const config = require('../config')
 
 const getUserInfo = async (ctx) => {
   const id = ctx.params.id
@@ -39,8 +40,8 @@ const postUserLogin = async (ctx) => {
 
 async function githubUserInfo(code) {
   const loginAccess = await axios.post('https://github.com/login/oauth/access_token', {
-    client_id: 'c265a8dc9bd925256116',
-    client_secret: '0535b4078b138a72f1142f950f671da2b5ab52da',
+    client_id: config.client_id,
+    client_secret: config.client_secret,
     code: code
   })
   // access_token=f20bbd86ce68c4028ba07b05c26da60dc0af9ce4&scope=&token_type=bearer
