@@ -1,5 +1,5 @@
 const jwt = require('../middleWares/token.js')
-const user = require('../models/user')
+const user = require('../models/user.js')
 const axios = require('axios')
 const querystring = require('querystring')
 const config = require('../config')
@@ -8,6 +8,16 @@ const getUserInfo = async (ctx) => {
   const id = ctx.params.id
   const result = await user.getUserById(id)
   ctx.body = result
+}
+
+const getMyInfo = async ctx => {
+  const userInfo = ctx.state.user
+  const result = await user.getUserById(userInfo.id)
+  if (result.name == userInfo.name) {
+    ctx.body = result
+  } else {
+    ctx.body = 'err 0.0'
+  }
 }
 
 const postUserLogin = async (ctx) => {
@@ -40,8 +50,8 @@ const postUserLogin = async (ctx) => {
 
 async function githubUserInfo(code) {
   const loginAccess = await axios.post('https://github.com/login/oauth/access_token', {
-    client_id: config.client_id,
-    client_secret: config.client_secret,
+    client_id: config.github.client_id,
+    client_secret: config.github.client_secret,
     code: code
   })
   // access_token=f20bbd86ce68c4028ba07b05c26da60dc0af9ce4&scope=&token_type=bearer
@@ -59,7 +69,8 @@ async function githubUserInfo(code) {
         status: githubUser.status,
         data: githubUser.data
       }
-    }).catch(err => {
+    })
+    .catch(err => {
       console.error('userError: ', err)
       return {
         success: false,
@@ -94,6 +105,7 @@ const getGithubUserInfo = async (ctx) => {
 
 module.exports = {
   getUserInfo,
+  getMyInfo,
   postUserLogin,
   getGithubUserInfo
 }

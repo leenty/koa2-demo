@@ -1,6 +1,7 @@
 const config = require('./config')
 const app = new (require('koa'))()
 const json = require('koa-json')
+const jwt = require('koa-jwt');
 const logger = require('koa-logger')
 // const cors = require('kcors')
 const cors = require('koa2-cors')
@@ -66,6 +67,8 @@ app.use(cors({
   maxAge:       config.maxAge,
   credentials:  config.credentials
 }))
+
+// app.use(jwt({ secret: 'koa-test' }))
 
 app.use(router.routes())
 

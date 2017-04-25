@@ -1,7 +1,13 @@
 const Comment = require('../db/models/index.js').comment
 
 const getCommentByUserId = async (userId) => {
-  const comment = await Comment._findAll('user_id', userId, ['id', 'comment'])
+  // const comment = await Comment._findAll('user_id', userId, ['id', 'comment'])
+  const comment = await Comment.findAll({
+    where: {
+      user_id: userId
+    },
+    attributes: ['id', 'comment', 'reply_id']
+  })
   return comment
 }
 

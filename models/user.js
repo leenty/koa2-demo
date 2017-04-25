@@ -1,11 +1,8 @@
 const User = require('../db/models/index.js').user
 
-const getUserById = async (id) => {
-  const userInfo = await User.findById(id, {
-    attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatar_url', 'location', 'mobile']
-  })
-  return userInfo
-}
+const getUserById = async (id) => await User.findById(id, {
+  attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatar_url', 'location', 'mobile']
+})
 
 const getUserByName = async (name) => {
   const userInfo = await User._findOne('name', name)

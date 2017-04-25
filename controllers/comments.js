@@ -2,6 +2,7 @@ const Comment = require('../models/comment')
 
 const getComment = async (ctx) => {
   const userId = ctx.params.user_id
+  console.log('getComment', ctx)
   const result = await Comment.getCommentByUserId(userId)
   ctx.body = result
 }
