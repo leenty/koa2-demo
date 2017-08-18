@@ -5,7 +5,12 @@ const getUserById = async (id) => await User.findById(id, {
 })
 
 const getUserByName = async (name) => {
-  const userInfo = await User._findOne('name', name)
+  // const userInfo = await User._findOne('name', name)
+  const userInfo = await User.findOne({
+    where: {
+      name
+    }
+  })
   return userInfo
 }
 
@@ -15,6 +20,7 @@ const createGithubUser = async ({id, name, password, email, bio, blog, company, 
       github_id: id
     },
     defaults: {
+      github_id: id,
       github_id: id,
       name,
       password,

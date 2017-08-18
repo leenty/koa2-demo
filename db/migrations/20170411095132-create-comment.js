@@ -24,6 +24,9 @@ module.exports = {
       reply_id: {
         type: Sequelize.INTEGER
       },
+      post_target: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

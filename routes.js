@@ -27,6 +27,10 @@ router.use('/api', jwt.getToken(), group(route => {
 
 }))
 
+// router.use('/', group(route => {
+//   route.get('/favicon.ico')
+// }))
+// 
 function group(routes) {
   const group = new koaRouter()
   routes(group)

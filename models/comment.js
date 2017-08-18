@@ -11,11 +11,11 @@ const getCommentByUserId = async (userId) => {
   return comment
 }
 
-const createComment = async ({user_id, comment, post_id}) => {
+const createComment = async ({user_id, comment, post_target}) => {
   await Comment.create({
     user_id,
     comment,
-    post_id
+    post_target
   })
   return true
 }

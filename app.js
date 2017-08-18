@@ -10,8 +10,6 @@ const uaParser = require('ua-parser-js')
 
 const router = require('./routes.js')
 
-require('./middleWares/modelFind')()
-
 app.use(require('koa-bodyparser')())
 
 app.use(async ({request, response, url}, next) => {
