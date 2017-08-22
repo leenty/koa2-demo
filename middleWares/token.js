@@ -1,9 +1,10 @@
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const koaJwt = require('koa-jwt');
-var config = require('../config')
+const config = require('../config')
 
-const setToken = tokenObj => jwt.sign(tokenObj, config.token_secret)
-const getToken = () => koaJwt({secret: config.token_secret})
+// 具体expiresIn取值可查阅 https://github.com/zeit/ms
+const setToken = (tokenObj, expiresIn = '1d') => jwt.sign(tokenObj, config.token_secret, {expiresIn})
+const getToken = () => koaJwt({secret: config.token_secret, debug: true})
 
 module.exports = {
   setToken,
