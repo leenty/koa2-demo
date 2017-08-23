@@ -10,7 +10,8 @@ module.exports = {
     'github': {
       'client_id': '',
       'client_secret': ''
-    }
+    },
+    'FE_address': 'http://localhost:8090'
   },
   'test': {
     'port': '8889',
@@ -23,7 +24,8 @@ module.exports = {
     'github': {
       'client_id': '',
       'client_secret': ''
-    }
+    },
+    'FE_address': 'http://localhost:8090'
   },
   'production': {
     'port': '80',
@@ -37,6 +39,7 @@ module.exports = {
     'github': {
       'client_id': '',
       'client_secret': ''
-    }
+    },
+    'FE_address': 'http://localhost:8090'
   }
 }

@@ -92,7 +92,7 @@ const getGithubUserInfo = async (ctx) => {
       name: userInfo.name,
       id: userInfo.id
     })
-    ctx.redirect(`http://localhost:8090${redirect}?token=${token}`)
+    ctx.redirect(`${config.FE_address}/${redirect}?token=${token}`)
     // ctx.body = {
     //   success: true,
     //   token: token,
