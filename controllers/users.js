@@ -82,7 +82,7 @@ async function githubUserInfo(code) {
 
 const getGithubUserInfo = async (ctx) => {
   const code = ctx.query.code
-  const redirect = ctx.query.redirect
+  const redirect = ctx.query.redirect ? `/${ctx.query.redirect}` : ''
   console.log('redirect >>> ', redirect)
   const userInfoResult = await githubUserInfo(code)
   if (userInfoResult.success) {
@@ -92,7 +92,7 @@ const getGithubUserInfo = async (ctx) => {
       name: userInfo.name,
       id: userInfo.id
     })
-    ctx.redirect(`${config.FE_address}/${redirect}?token=${token}`)
+    ctx.redirect(`${config.FE_address}${redirect}?token=${token}`)
     // ctx.body = {
     //   success: true,
     //   token: token,
