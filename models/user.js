@@ -14,15 +14,14 @@ const getUserByName = async (name) => {
   return userInfo
 }
 
-const createGithubUser = async ({id, name, password, email, bio, blog, company, github, avatar_url, location, mobile}) => {
+const createGithubUser = async ({id, name, login, password, email, bio, blog, company, github, avatar_url, location, mobile}) => {
   var result = await User.findOrCreate({
     where: {
       github_id: id
     },
     defaults: {
       github_id: id,
-      github_id: id,
-      name,
+      name: name || login || '不愿留下姓名的滑稽',
       password,
       email,
       bio,
