@@ -7,6 +7,8 @@ const router = new koaRouter()
 const Users = require('./controllers/users.js')
 const Comments = require('./controllers/comments.js')
 
+const checkHimself = require('./middleWares/model/himself.js')
+
 //  (ctx, next) => {
 //   console.log('middleware', ctx)
 //   console.log('middlewaresa', jwt.getToken())
@@ -20,17 +22,13 @@ router.use('/auth', group(route => {
 }))
 
 router.use('/api', jwt.getToken(), group(route => {
-  route.get('/comment/:user_id', Comments.getComment)
+  route.get('/comment', Comments.getComment)
   route.post('/comment', Comments.createComment)
-  route.delete('/comment/:user_id/:id', Comments.removeComment)
-  route.put('/comment/:user_id/:id', Comments.updateComment)
+  route.delete('/comment', Comments.removeComment)
+  route.put('/comment', Comments.updateComment)
 
 }))
 
-// router.use('/', group(route => {
-//   route.get('/favicon.ico')
-// }))
-// 
 function group(routes) {
   const group = new koaRouter()
   routes(group)

@@ -1,7 +1,6 @@
 const Comment = require('../db/models/index.js').comment
 
 const getCommentByUserId = async (userId) => {
-  // const comment = await Comment._findAll('user_id', userId, ['id', 'comment'])
   const comment = await Comment.findAll({
     where: {
       user_id: userId
@@ -11,7 +10,7 @@ const getCommentByUserId = async (userId) => {
   return comment
 }
 
-const createComment = async ({user_id, comment, post_target}) => {
+const createComment = async (user_id, comment, post_target) => {
   await Comment.create({
     user_id,
     comment,
