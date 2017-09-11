@@ -1,5 +1,12 @@
 const Comment = require('../models/comment')
 
+const getCommentByPostTarget = async ctx => {
+  const {post_target} = ctx.params
+  const result = await Comment.getCommentByPostTarget(post_target)
+  
+  ctx.body = result
+}
+
 const getComment = async (ctx) => {
   const user_id = ctx.state.user.id
   console.log('getComment', ctx)
@@ -8,10 +15,10 @@ const getComment = async (ctx) => {
 }
 
 const createComment = async (ctx) => {
-  const {comment, post_target} = ctx.request.body
+  const {comment, post_target, reply_id} = ctx.request.body
   const user_id = ctx.state.user.id
-  console.log('createComment', user_id, comment, post_target)
-  await Comment.createComment(user_id, comment, post_target)
+  console.log('createComment', {user_id, comment, post_target, reply_id})
+  await Comment.createComment({user_id, comment, post_target, reply_id})
   ctx.body = {
     success: true
   }
@@ -43,5 +50,6 @@ module.exports = {
   getComment,
   createComment,
   removeComment,
-  updateComment
+  updateComment,
+  getCommentByPostTarget
 }

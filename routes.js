@@ -9,11 +9,6 @@ const Comments = require('./controllers/comments.js')
 
 const checkHimself = require('./middleWares/model/himself.js')
 
-//  (ctx, next) => {
-//   console.log('middleware', ctx)
-//   console.log('middlewaresa', jwt.getToken())
-//   return next()
-// },
 router.use('/auth', group(route => {
   route.get('/user/:id', Users.getUserInfo)
   route.get('/user', jwt.getToken(), Users.getMyInfo)
@@ -21,12 +16,15 @@ router.use('/auth', group(route => {
   route.get('/github', Users.getGithubUserInfo)
 }))
 
+router.use('/api', group(route => {
+  route.get('/comment/:post_target', Comments.getCommentByPostTarget)
+}))
+
 router.use('/api', jwt.getToken(), group(route => {
   route.get('/comment', Comments.getComment)
   route.post('/comment', Comments.createComment)
   route.delete('/comment', Comments.removeComment)
   route.put('/comment', Comments.updateComment)
-
 }))
 
 function group(routes) {

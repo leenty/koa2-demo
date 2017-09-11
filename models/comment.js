@@ -1,19 +1,33 @@
 const Comment = require('../db/models/index.js').comment
+// const User = require('../db/models/index.js').user
+// Comment.belongsTo(User)
 
-const getCommentByUserId = async (userId) => {
+const getCommentByPostTarget = async post_target => {
+  const comments = await Comment.findAll({
+    // include: [ User ],
+    where: {
+      post_target
+    },
+    attributes: ['id', 'comment', 'reply_id', 'post_target', 'reply_userId', 'updatedAt']
+  })
+  return comments
+}
+
+const getCommentByUserId = async user_id => {
   const comment = await Comment.findAll({
     where: {
-      user_id: userId
+      user_id
     },
-    attributes: ['id', 'comment', 'reply_id']
+    attributes: ['id', 'comment', 'reply_id', 'post_target']
   })
   return comment
 }
 
-const createComment = async (user_id, comment, post_target) => {
+const createComment = async ({user_id, comment, reply_id, post_target}) => {
   await Comment.create({
     user_id,
     comment,
+    reply_id,
     post_target
   })
   return true
@@ -45,6 +59,7 @@ const updateComment = async (id, user_id, comment) => {
 }
 
 module.exports = {
+  getCommentByPostTarget,
   getCommentByUserId,
   createComment,
   removeComment,
