@@ -1,0 +1,19 @@
+apps:
+  - script: "./app.js"
+    name: 'koa'
+    watch: 'watch'
+  - script: "./app.js"
+    name: 'koa-dev'
+    interpreter_args: '--inspect'
+    watch: 'watch'
+  - script: "./app.js"
+    name: 'koa-pro'
+    watch: 'watch'
+    instances: 2
+    exec_mode: cluster
+    merge_logs: true
+    out_file: 'logs/stdout.log'
+    error_file: 'logs/stdout.log'
+    log_date_format: 'YYYY-MM-DD HH:mm:ss'
+    env:
+      NODE_ENV: 'production'

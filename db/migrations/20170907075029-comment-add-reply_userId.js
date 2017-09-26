@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.addColumn('comments', 'reply_userId', {
+    return queryInterface.addColumn('comments', 'replyUserId', {
       type: Sequelize.INTEGER,
       references: {
           model: 'users',
@@ -14,6 +14,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.removeColumn('comments', 'reply_userId')
+    return queryInterface.removeColumn('comments', 'replyUserId')
   }
 };

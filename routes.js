@@ -17,7 +17,7 @@ router.use('/auth', group(route => {
 }))
 
 router.use('/api', group(route => {
-  route.get('/comment/:post_target', Comments.getCommentByPostTarget)
+  route.get('/comment/:postTarget', Comments.getCommentByPostTarget)
 }))
 
 router.use('/api', jwt.getToken(), group(route => {

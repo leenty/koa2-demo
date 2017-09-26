@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      github_id: {
+      githubId: {
         unique: true,
         type: Sequelize.STRING
       },
@@ -39,7 +39,7 @@ module.exports = {
       github: {
         type: Sequelize.STRING
       },
-      avatar_url: {
+      avatarUrl: {
         type: Sequelize.STRING
       },
       location: {

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -21,10 +21,10 @@ module.exports = {
       comment: {
         type: Sequelize.TEXT
       },
-      reply_id: {
+      replyId: {
         type: Sequelize.INTEGER
       },
-      post_target: {
+      postTarget: {
         type: Sequelize.STRING
       },
       createdAt: {

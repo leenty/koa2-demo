@@ -4,9 +4,10 @@
   "description": "use koa2 to create server",
   "main": "index.js",
   "scripts": {
-    "dev": "node app.js",
-    "debug": "node --inspect app.js",
-    "orm": "sh bin/orm.sh"
+    "start": "node app.js",
+    "pm2": "pm2 start ./pm2.yml --only koa",
+    "dev": "pm2 start ./pm2.yml --only koa-dev",
+    "pro": "pm2 start ./pm2.yml --only koa-pro"
   },
   "repository": {
     "type": "git",

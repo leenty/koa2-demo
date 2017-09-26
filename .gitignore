@@ -4,3 +4,4 @@ bin/ngrok.sh
 config/database.json
 config/config.js
 npm-debug.log
+/logs

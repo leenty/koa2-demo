@@ -1,6 +1,6 @@
 const User = require('../../db/models/index.js').user
 
-const checkHimself = async (ctx, next, idName = 'user_id') => {
+const checkHimself = async (ctx, next, idName = 'userId') => {
   if (!ctx.state) {
     ctx.body = {
       success: false,

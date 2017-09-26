@@ -23,14 +23,14 @@ const sort = function (comments) {
   let sortedReplyId = []
   let sortedComments = []
   comments.forEach(comment => {
-    if (comment.reply_id) {
+    if (comment.replyId) {
       let indexArray = deepFind(comment)
       if (indexArray.length === 1) {
-        sortedReplyId.push([comment.reply_id])
+        sortedReplyId.push([comment.replyId])
         sortedComments.push([comment])
       }
     } else {
-      sortedReplyId.push([comment.reply_id])
+      sortedReplyId.push([comment.replyId])
       sortedComments.push([comment])
     }
   })

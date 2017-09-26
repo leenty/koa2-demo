@@ -1,7 +1,7 @@
 const User = require('../db/models/index.js').user
 
 const getUserById = async (id) => await User.findById(id, {
-  attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatar_url', 'location', 'mobile']
+  attributes: ['id', 'name', 'email', 'bio', 'blog', 'company', 'github', 'avatarUrl', 'location', 'mobile']
 })
 
 const getUserByName = async (name) => {
@@ -14,7 +14,7 @@ const getUserByName = async (name) => {
   return userInfo
 }
 
-const createGithubUser = async ({id, name, login, password, email, bio, blog, company, github, avatar_url, location, mobile}) => {
+const createGithubUser = async ({id, name, login, password, email, bio, blog, company, github, avatarUrl, location, mobile}) => {
   var result = await User.findOrCreate({
     where: {
       github_id: id
@@ -28,7 +28,7 @@ const createGithubUser = async ({id, name, login, password, email, bio, blog, co
       blog,
       company,
       github,
-      avatar_url,
+      avatarUrl,
       location,
       mobile
     }

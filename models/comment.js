@@ -1,49 +1,52 @@
 const Comment = require('../db/models/index.js').comment
-// const User = require('../db/models/index.js').user
+const User = require('../db/models/index.js').user
 // Comment.belongsTo(User)
 
-const getCommentByPostTarget = async post_target => {
+const getCommentByPostTarget = async postTarget => {
   const comments = await Comment.findAll({
-    // include: [ User ],
+    include: [ {
+      model: User,
+      attributes: ['id', 'name', 'github', 'avatarUrl']
+    } ],
     where: {
-      post_target
+      postTarget
     },
-    attributes: ['id', 'comment', 'reply_id', 'post_target', 'reply_userId', 'updatedAt']
+    attributes: ['id', 'comment', 'replyId', 'postTarget', 'replyUserId', 'updatedAt']
   })
   return comments
 }
 
-const getCommentByUserId = async user_id => {
+const getCommentByUserId = async userId => {
   const comment = await Comment.findAll({
     where: {
-      user_id
+      userId
     },
-    attributes: ['id', 'comment', 'reply_id', 'post_target']
+    attributes: ['id', 'comment', 'replyId', 'postTarget']
   })
   return comment
 }
 
-const createComment = async ({user_id, comment, reply_id, post_target}) => {
+const createComment = async ({userId, comment, replyId, postTarget}) => {
   await Comment.create({
-    user_id,
+    userId,
     comment,
-    reply_id,
-    post_target
+    replyId,
+    postTarget
   })
   return true
 }
 
-const removeComment = async (id, user_id) => {
+const removeComment = async (id, userId) => {
   const result = await Comment.destroy({
     where: {
       id,
-      user_id
+      userId
     }
   })
   return result ? '删除成功！' : '删除失败！'
 }
 
-const updateComment = async (id, user_id, comment) => {
+const updateComment = async (id, userId, comment) => {
   const result = await Comment.update(
     {
       comment
@@ -51,7 +54,7 @@ const updateComment = async (id, user_id, comment) => {
     {
       where: {
         id,
-        user_id
+        userId
       }
     }
   )
