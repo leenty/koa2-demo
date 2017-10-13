@@ -2,12 +2,14 @@ const Comment = require('../db/models/index.js').comment
 const User = require('../db/models/index.js').user
 // Comment.belongsTo(User)
 
+const userInfo = [{
+  model: User,
+  attributes: ['id', 'name', 'github', 'avatarUrl']
+}]
+
 const getCommentByPostTarget = async postTarget => {
   const comments = await Comment.findAll({
-    include: [ {
-      model: User,
-      attributes: ['id', 'name', 'github', 'avatarUrl']
-    } ],
+    include: userInfo,
     where: {
       postTarget
     },
@@ -18,6 +20,7 @@ const getCommentByPostTarget = async postTarget => {
 
 const getCommentByUserId = async userId => {
   const comment = await Comment.findAll({
+    // include: userInfo,
     where: {
       userId
     },
