@@ -3,7 +3,7 @@ const Comment = require('../models/comment')
 const getCommentByPostTarget = async ctx => {
   const {postTarget} = ctx.params
   const result = await Comment.getCommentByPostTarget(postTarget)
-  
+
   ctx.body = result
 }
 

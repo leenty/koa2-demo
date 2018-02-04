@@ -43,7 +43,8 @@ const postUserLogin = async (ctx) => {
   } else {
     ctx.body = {
       success: false,
-      info: 'sorry! User does not exist!'
+      info: '抱歉！用户不存在！'
+      // info: 'sorry! User does not exist!'
     }
   }
 }
